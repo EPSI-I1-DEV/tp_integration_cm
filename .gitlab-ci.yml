@@ -35,6 +35,8 @@ test_job:
 variables:
   SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
   GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task
+  POSTGRES_HOST_AUTH_METHOD: trust
+
 sonarcloud-check:
   image: maven:3.6.3-jdk-11
   cache:
@@ -43,6 +45,7 @@ sonarcloud-check:
       - .sonar/cache
   script:
     - mvn verify sonar:sonar -Dsonar.projectKey=tp_integration_cm
+    - export DATABASE_URL_TEST=postgres://gael:@postgres:5432/qieam
   only:
     - merge_requests
     - main
