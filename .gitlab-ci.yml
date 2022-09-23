@@ -33,7 +33,7 @@ test_job:
     - if: '$CI_COMMIT_BRANCH == "main"'
 
 services:
-  - postgres: 12.2-alpine
+  - postgres:12.2-alpine
   
 variables:
   SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
